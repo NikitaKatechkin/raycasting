@@ -5,6 +5,8 @@
 #include <cassert>
 #include <math.h>
 
+#define PI 3.14159
+
 uint32_t pack_color(const uint8_t r, const uint8_t g, const uint8_t b, const uint8_t a = 255)
 {
     return (a << 24) + (b << 16) + (g << 8) + r;
@@ -42,7 +44,11 @@ void draw_rectangle(std::vector<uint32_t> &image, const size_t image_width, cons
         {
             size_t current_row = y + rect_row;
             size_t current_col = x + rect_col;
-            assert(current_col < image_width && current_row < image_height);
+            //assert(current_col < image_width && current_row < image_height);
+            if (current_col >= image_width || current_row >=image_height)
+            {
+                continue;
+            }
             image[current_col + current_row * image_width] = color;
         }
     }
@@ -50,14 +56,15 @@ void draw_rectangle(std::vector<uint32_t> &image, const size_t image_width, cons
 
 int main()
 {
-    const size_t win_width = 512;
+    const size_t win_width = 1024;
     const size_t win_height = 512;
 
-    std::vector<uint32_t> frameBuffer(win_width * win_height, 255);
+    std::vector<uint32_t> frameBuffer(win_width * win_height, pack_color(255, 255, 255));
 
     float player_x = 3.456;
     float player_y = 2.345;
     float player_a = 1.523;
+    float player_field_of_view = PI / 3;
     const size_t player_width = 5;
     const size_t player_height = 5;
 
@@ -81,7 +88,7 @@ int main()
                        "0002222222200000";
     assert(sizeof(game_map) == map_width*map_height+1);
 
-    const size_t rect_width = win_width / map_width;
+    const size_t rect_width = win_width / (map_width * 2);
     const size_t rect_height = win_height / map_height;
 
     for (size_t row_rect_index = 0; row_rect_index < map_height; row_rect_index++)
@@ -102,20 +109,27 @@ int main()
 
     draw_rectangle(frameBuffer, win_width, win_height, player_x * rect_width, player_y * rect_height, player_width, player_height, pack_color(255, 255, 255));
 
-    for(float distance = 0; distance < 20; distance += 0.05)
+    for (size_t i = 0; i < win_width / 2; i++)
     {
-        float current_x = player_x + distance * cos(player_a);
-        float current_y = player_y + distance * sin(player_a);
-
-        if (game_map[int(current_x)+ int(current_y)*map_width] != ' ')
+        float angle = (player_a - player_field_of_view / 2) + i * (player_field_of_view / float(win_width / 2));
+        for(float distance = 0; distance < 20; distance += 0.05)
         {
-            break;
-        }
+            float current_x = player_x + distance * cos(angle);
+            float current_y = player_y + distance * sin(angle);
 
-        size_t px_x = current_x * rect_width;
-        size_t px_y = current_y * rect_height;
-        frameBuffer[px_x + px_y * win_width] = pack_color(255, 255, 255);
+            size_t px_x = current_x * rect_width;
+            size_t px_y = current_y * rect_height;
+            frameBuffer[px_x + px_y * win_width] = pack_color(160, 160, 160);
+
+            if (game_map[int(current_x)+ int(current_y)*map_width] != ' ')
+            {
+                size_t column_height = win_height / distance;
+                draw_rectangle(frameBuffer, win_width, win_height, (win_width/2 + i), (win_height / 2 - column_height / 2), 1, column_height, pack_color(0, 255, 255));
+                break;
+            }
+        }
     }
+
 
     drop_ppm_image("./out.ppm", frameBuffer, win_width, win_height);
 
