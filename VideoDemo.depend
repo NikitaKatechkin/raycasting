@@ -1,12 +1,18 @@
 # depslib dependency file v1.0
-1630060810 source:c:\projects\cpp\sfml\videodemo\main.cpp
+1630093331 source:c:\projects\cpp\sfml\videodemo\main.cpp
 	<fstream>
 	<vector>
 	<cstdint>
 	<cassert>
+	<math.h>
+	"player.h"
+
+1630093071 source:c:\projects\cpp\sfml\videodemo\player.cpp
+	"player.h"
+
+1630092952 c:\projects\cpp\sfml\videodemo\player.h
 	<iostream>
-	<fstream>
-	<vector>
-	<cstdint>
-	<cassert>
+
+1630092952 source:c:\projects\cpp\sfml\videodemo\player.h
+	<iostream>
 

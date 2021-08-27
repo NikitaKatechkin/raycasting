@@ -1,9 +1,11 @@
-#include <iostream>
+
 #include <fstream>
 #include <vector>
 #include <cstdint>
 #include <cassert>
 #include <math.h>
+
+#include "player.h"
 
 #define PI 3.14159
 
