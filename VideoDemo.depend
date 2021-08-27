@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1629802902 source:c:\projects\cpp\sfml\videodemo\main.cpp
+	<iostream>
+	<vector>
+	<utility>
+	<algorithm>
+	<chrono>
+	<math.h>
+	<stdio.h>
+	<Windows.h>
+
