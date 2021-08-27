@@ -33,7 +33,21 @@ void drop_ppm_image(const std::string filename, const std::vector<uint32_t> &ima
 
 int main()
 {
-    std::cout << "Hello, world" << std::endl;
+    const size_t win_width = 512;
+    const size_t win_height = 512;
+
+    std::vector<uint32_t> frameBuffer(win_width * win_height, 255);
+
+    for(size_t pxRow = 0; pxRow > win_height; pxRow++)
+    {
+        for(size_t pxCol = 0; pxCol > win_width; pxCol++)
+        {
+            uint8_t r = int(pxRow / win_height) * 255;
+            uint8_t g = int(pxCol/ win_width) * 255;
+            uint8_t b = 0;
+            frameBuffer[pxCol + pxRow * win_width] = pack_color(r, g, b);
+        }
+    }
 
     return 0;
 }
