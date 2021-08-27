@@ -63,12 +63,7 @@ int main()
 
     std::vector<uint32_t> frameBuffer(win_width * win_height, pack_color(255, 255, 255));
 
-    float player_x = 3.456;
-    float player_y = 2.345;
-    float player_a = 1.523;
-    float player_field_of_view = PI / 3;
-    const size_t player_width = 5;
-    const size_t player_height = 5;
+    Player player(coordinate(3.456, 2.345), view(1.523f, float(PI / 3)), phys_size(5, 5));
 
     const size_t map_width = 16;
     const size_t map_height = 16;
@@ -109,15 +104,16 @@ int main()
         }
     }
 
-    draw_rectangle(frameBuffer, win_width, win_height, player_x * rect_width, player_y * rect_height, player_width, player_height, pack_color(255, 255, 255));
+    draw_rectangle(frameBuffer, win_width, win_height, player.getCoords().x_coordinate * rect_width,
+                   player.getCoords().y_coordinate * rect_height, player.getSize().width, player.getSize().height, pack_color(255, 255, 255));
 
     for (size_t i = 0; i < win_width / 2; i++)
     {
-        float angle = (player_a - player_field_of_view / 2) + i * (player_field_of_view / float(win_width / 2));
+        float angle = (player.getView().angle - player.getView().field_of_view / 2) + i * (player.getView().field_of_view / float(win_width / 2));
         for(float distance = 0; distance < 20; distance += 0.05)
         {
-            float current_x = player_x + distance * cos(angle);
-            float current_y = player_y + distance * sin(angle);
+            float current_x = player.getCoords().x_coordinate + distance * cos(angle);
+            float current_y = player.getCoords().y_coordinate + distance * sin(angle);
 
             size_t px_x = current_x * rect_width;
             size_t px_y = current_y * rect_height;

@@ -1,25 +1,7 @@
 #ifndef PLAYER_H_INCLUDED
 #define PLAYER_H_INCLUDED
 
-#include <iostream>
-
-struct Coordinate
-{
-    float x_coordinate;
-    float y_coordinate;
-};
-
-struct View
-{
-    float angle;
-    float field_of_view;
-};
-
-struct Phys_size
-{
-    size_t width;
-    size_t height;
-};
+#include "tools.h"
 
 class Player
 {
