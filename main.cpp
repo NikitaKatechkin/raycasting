@@ -3,6 +3,7 @@
 #include <vector>
 #include <cstdint>
 #include <cassert>
+#include <math.h>
 
 uint32_t pack_color(const uint8_t r, const uint8_t g, const uint8_t b, const uint8_t a = 255)
 {
@@ -54,16 +55,11 @@ int main()
 
     std::vector<uint32_t> frameBuffer(win_width * win_height, 255);
 
-    /*for(size_t pxRow = 0; pxRow < win_height; pxRow++)
-    {
-        for(size_t pxCol = 0; pxCol < win_width; pxCol++)
-        {
-            uint8_t r = (pxRow * 255) / float(win_height);
-            uint8_t g = (pxCol * 255) / float(win_width);
-            uint8_t b = 0;
-            frameBuffer[pxCol + pxRow * win_width] = pack_color(r, g, b);
-        }
-    }*/
+    float player_x = 3.456;
+    float player_y = 2.345;
+    float player_a = 1.523;
+    const size_t player_width = 5;
+    const size_t player_height = 5;
 
     const size_t map_width = 16;
     const size_t map_height = 16;
@@ -102,6 +98,23 @@ int main()
 
             draw_rectangle(frameBuffer, win_width, win_height, rect_start_x, rect_start_y, rect_width, rect_height, pack_color(74, 255, 99));
         }
+    }
+
+    draw_rectangle(frameBuffer, win_width, win_height, player_x * rect_width, player_y * rect_height, player_width, player_height, pack_color(255, 255, 255));
+
+    for(float distance = 0; distance < 20; distance += 0.05)
+    {
+        float current_x = player_x + distance * cos(player_a);
+        float current_y = player_y + distance * sin(player_a);
+
+        if (game_map[int(current_x)+ int(current_y)*map_width] != ' ')
+        {
+            break;
+        }
+
+        size_t px_x = current_x * rect_width;
+        size_t px_y = current_y * rect_height;
+        frameBuffer[px_x + px_y * win_width] = pack_color(255, 255, 255);
     }
 
     drop_ppm_image("./out.ppm", frameBuffer, win_width, win_height);
