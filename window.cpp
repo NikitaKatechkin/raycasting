@@ -38,5 +38,5 @@ Window::Window(size_t l_width, size_t l_height, uint32_t color):
 
 Window::~Window()
 {
-
+    delete m_frameBuffer;
 }
