@@ -1,6 +1,6 @@
 #include "map.h"
 
-void Game_map::draw(Phys_size winSize, std::vector<uint32_t>& frameBuffer)
+void Game_map::draw(Phys_size winSize, std::vector<uint32_t>* frameBuffer)
 {
 
     const size_t rect_width = winSize.width / (m_sizeInTile.width * 2);

@@ -12,7 +12,7 @@ public:
     char* game_scheme;
     Phys_size m_sizeInTile;
 
-    void draw(Phys_size winSize, std::vector<uint32_t>& frameBuffer);
+    void draw(Phys_size winSize, std::vector<uint32_t>* frameBuffer);
 
     Game_map(std::string filePath);
     ~Game_map();

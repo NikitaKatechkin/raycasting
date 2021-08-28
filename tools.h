@@ -36,8 +36,8 @@ uint32_t pack_color(const uint8_t r, const uint8_t g, const uint8_t b, const uin
 
 void unpack_color(const uint32_t &color, uint8_t &r, uint8_t &g, uint8_t &b, uint8_t &a);
 
-void drop_ppm_image(const std::string filename, const std::vector<uint32_t> &image, const size_t width, const size_t height);
+void drop_ppm_image(const std::string filename, const std::vector<uint32_t> *image, const size_t width, const size_t height);
 
-void draw_rectangle(std::vector<uint32_t> &image, const size_t image_width, const size_t image_height,
+void draw_rectangle(std::vector<uint32_t> *image, const size_t image_width, const size_t image_height,
                     const size_t x, const size_t y, const size_t width, const size_t height, const uint32_t color);
 #endif // TOOLS_H_INCLUDED

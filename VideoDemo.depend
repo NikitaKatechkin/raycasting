@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1630102355 source:c:\projects\cpp\sfml\videodemo\main.cpp
+1630185990 source:c:\projects\cpp\sfml\videodemo\main.cpp
 	<iostream>
 	<fstream>
 	<vector>
@@ -8,6 +8,7 @@
 	<math.h>
 	"player.h"
 	"map.h"
+	"window.h"
 
 1630102355 source:c:\projects\cpp\sfml\videodemo\player.cpp
 	"player.h"
@@ -18,7 +19,7 @@
 1630092952 source:c:\projects\cpp\sfml\videodemo\player.h
 	<iostream>
 
-1630102355 c:\projects\cpp\sfml\videodemo\tools.h
+1630187514 c:\projects\cpp\sfml\videodemo\tools.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -26,10 +27,10 @@
 	<cassert>
 	<math.h>
 
-1630102355 source:c:\projects\cpp\sfml\videodemo\map.cpp
+1630187276 source:c:\projects\cpp\sfml\videodemo\map.cpp
 	"map.h"
 
-1630102355 c:\projects\cpp\sfml\videodemo\map.h
+1630187158 c:\projects\cpp\sfml\videodemo\map.h
 	"tools.h"
 	<sstream>
 	<string>
@@ -38,6 +39,14 @@
 1630095855 c:\projects\cpp\sfml\videodemo\tools.cpp
 	"tools.h"
 
-1630102355 source:c:\projects\cpp\sfml\videodemo\tools.cpp
+1630187495 source:c:\projects\cpp\sfml\videodemo\tools.cpp
 	"tools.h"
+
+1630187375 c:\projects\cpp\sfml\videodemo\window.h
+	<cstddef>
+	<vector>
+	<cstdint>
+
+1630187110 source:c:\projects\cpp\sfml\videodemo\window.cpp
+	"window.h"
 
