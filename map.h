@@ -11,10 +11,14 @@ class Game_map
 public:
     char* game_scheme;
     Phys_size m_sizeInTile;
+    Phys_size m_blockSize;
 
     void draw(Phys_size winSize, std::vector<uint32_t>* frameBuffer);
 
-    Game_map(std::string filePath);
+    void setBlockSize(Phys_size l_size);
+    Phys_size getBlockSize();
+
+    Game_map(std::string filePath, Phys_size l_winSize);
     ~Game_map();
 };
 

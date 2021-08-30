@@ -46,15 +46,15 @@ int main()
 
     Player player(coordinate(3.456, 2.345), view(1.523f, float(PI / 3)), phys_size(5, 5));
 
-    Game_map game_map("map.txt");
+    Game_map game_map("map.txt", phys_size(window.getWidth(), window.getHeight()));
 
-    const size_t rect_width = window.getWidth() / (game_map.m_sizeInTile.width * 2);
-    const size_t rect_height = window.getHeight() / game_map.m_sizeInTile.width;
+    /*const size_t rect_width = window.getWidth() / (game_map.m_sizeInTile.width * 2);
+    const size_t rect_height = window.getHeight() / game_map.m_sizeInTile.width;*/
 
     game_map.draw(phys_size(window.getWidth(), window.getHeight()), window.getFrameBuffer());
 
-    draw_rectangle(window.getFrameBuffer(), window.getWidth(), window.getHeight(), player.getCoords().x_coordinate * rect_width,
-                   player.getCoords().y_coordinate * rect_height, player.getSize().width, player.getSize().height, pack_color(255, 255, 255));
+    draw_rectangle(window.getFrameBuffer(), window.getWidth(), window.getHeight(), player.getCoords().x_coordinate * game_map.getBlockSize().width,
+                   player.getCoords().y_coordinate * game_map.getBlockSize().height, player.getSize().width, player.getSize().height, pack_color(255, 255, 255));
 
     draw_first_view(phys_size(window.getWidth(), window.getHeight()), window.getFrameBuffer(), player, game_map);
 

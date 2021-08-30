@@ -1,10 +1,20 @@
 #include "map.h"
 
+void Game_map::setBlockSize(Phys_size l_blockSize)
+{
+    m_blockSize = l_blockSize;
+}
+
+Phys_size Game_map::getBlockSize()
+{
+    return m_blockSize;
+}
+
 void Game_map::draw(Phys_size winSize, std::vector<uint32_t>* frameBuffer)
 {
 
-    const size_t rect_width = winSize.width / (m_sizeInTile.width * 2);
-    const size_t rect_height = winSize.height / m_sizeInTile.height;
+    /*const size_t rect_width = winSize.width / (m_sizeInTile.width * 2);
+    const size_t rect_height = winSize.height / m_sizeInTile.height;*/
 
     for (size_t row_rect_index = 0; row_rect_index < m_sizeInTile.height; row_rect_index++)
     {
@@ -15,15 +25,16 @@ void Game_map::draw(Phys_size winSize, std::vector<uint32_t>* frameBuffer)
                 continue;
             }
 
-            size_t rect_start_x = col_rect_index * rect_width;
-            size_t rect_start_y = row_rect_index * rect_height;
+            size_t rect_start_x = col_rect_index * m_blockSize.width;
+            size_t rect_start_y = row_rect_index * m_blockSize.height;
 
-            draw_rectangle(frameBuffer, winSize.width, winSize.height, rect_start_x, rect_start_y, rect_width, rect_height, pack_color(74, 255, 99));
+            draw_rectangle(frameBuffer, winSize.width, winSize.height, rect_start_x, rect_start_y,
+                           m_blockSize.width, m_blockSize.height, pack_color(74, 255, 99));
         }
     }
 }
 
-Game_map::Game_map(std::string filePath)
+Game_map::Game_map(std::string filePath, Phys_size l_winSize)
 {
     std::ifstream file(filePath);
 
@@ -45,6 +56,8 @@ Game_map::Game_map(std::string filePath)
             game_scheme[col_index + row_index * m_sizeInTile.width] = line[col_index];
         }
     }
+
+    m_blockSize = phys_size(l_winSize.width / (m_sizeInTile.width * 2), l_winSize.height / m_sizeInTile.height);
 }
 
 Game_map::~Game_map()

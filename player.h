@@ -20,6 +20,7 @@ public:
 private:
     Coordinate m_coords;
     View m_view;
+
     Phys_size m_size;
 };
 
