@@ -65,12 +65,31 @@ int main()
 #define SFML_STATIC
 
 #include <SFML/Graphics.hpp>
+#include <cassert>
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    const size_t map_w = 16;
+    const size_t map_h = 16;
+    const char map[] = "0000222222220000"\
+                       "1              0"\
+                       "1      11111   0"\
+                       "1     0        0"\
+                       "0     0  1110000"\
+                       "0     3        0"\
+                       "0   10000      0"\
+                       "0   0   11100  0"\
+                       "0   0   0      0"\
+                       "0   0   1  00000"\
+                       "0       1      0"\
+                       "2       1      0"\
+                       "0       0      0"\
+                       "0 0000000      0"\
+                       "0              0"\
+                       "0002222222200000";
+    assert(sizeof(map) == map_w*map_h+1);
+
+    sf::RenderWindow window(sf::VideoMode(512, 512), "SFML works!");
 
     while (window.isOpen())
     {
@@ -82,7 +101,23 @@ int main()
         }
 
         window.clear();
-        window.draw(shape);
+
+        const size_t rect_w = window.getSize().x/map_w;
+        const size_t rect_h = window.getSize().y/map_h;
+        for (size_t j=0; j<map_h; j++) { // draw the map
+            for (size_t i=0; i<map_w; i++) {
+                if (map[i+j*map_w]==' ') continue; // skip empty spaces
+                size_t rect_x = i*rect_w;
+                size_t rect_y = j*rect_h;
+
+                sf::RectangleShape shape(sf::Vector2f(rect_w, rect_h));
+                shape.setFillColor(sf::Color::Green);
+                shape.setPosition(sf::Vector2f(float(rect_x), float(rect_y)));
+
+                window.draw(shape);
+            }
+        }
+
         window.display();
     }
 
