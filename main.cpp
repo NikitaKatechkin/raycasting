@@ -67,6 +67,7 @@ int main()
 #include <SFML/Graphics.hpp>
 #include "map.h"
 #include <cassert>
+#include "player.h"
 
 /*void draw_first_view(Phys_size winSize, std::vector<uint32_t>* frameBuffer, Player& player, Game_map& game_map)
 {
@@ -99,7 +100,8 @@ int main()
 int main()
 {
     sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(1024, 512), "DOOM replica");
-    Game_map game_map("./map.txt", window->getSize());
+    Game_map* game_map = new Game_map("./map.txt", window->getSize());
+    Player* player = new Player(sf::Vector2f(3.456, 2.345), view(1.523, PI / 3), sf::Vector2f(5.f, 5.f));
 
     while (window->isOpen())
     {
@@ -112,7 +114,8 @@ int main()
 
         window->clear();
 
-        game_map.draw(window);
+        game_map->draw(window);
+        player->getCamera()->draw(window, player, game_map);
 
         window->display();
     }
