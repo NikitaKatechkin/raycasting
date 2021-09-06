@@ -2,6 +2,8 @@
 #define MAP_H_INCLUDED
 
 #include "tools.h"
+
+#include <SFML/Graphics.hpp>
 #include <sstream>
 #include <string>
 #include <fstream>
@@ -10,15 +12,15 @@ class Game_map
 {
 public:
     char* game_scheme;
-    Phys_size m_sizeInTile;
-    Phys_size m_blockSize;
+    sf::Vector2f m_sizeInTile;
+    sf::Vector2f m_blockSize;
 
-    void draw(Phys_size winSize, std::vector<uint32_t>* frameBuffer);
+    void draw(sf::RenderWindow *l_window/*, std::vector<uint32_t>* frameBuffer*/);
 
-    void setBlockSize(Phys_size l_size);
-    Phys_size getBlockSize();
+    void setBlockSize(sf::Vector2f l_size);
+    sf::Vector2f getBlockSize();
 
-    Game_map(std::string filePath, Phys_size l_winSize);
+    Game_map(std::string filePath, sf::Vector2u winSize);
     ~Game_map();
 };
 

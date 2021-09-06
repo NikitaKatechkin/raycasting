@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1630689782 source:c:\projects\cpp\sfml\videodemo\main.cpp
+1630916504 source:c:\projects\cpp\sfml\videodemo\main.cpp
 	<fstream>
 	<vector>
 	<cstdint>
@@ -9,6 +9,8 @@
 	"map.h"
 	"window.h"
 	<SFML/Graphics.hpp>
+	"map.h"
+	<cassert>
 
 1630313556 source:c:\projects\cpp\sfml\videodemo\player.cpp
 	"player.h"
@@ -27,11 +29,12 @@
 	<cassert>
 	<math.h>
 
-1630314322 source:c:\projects\cpp\sfml\videodemo\map.cpp
+1630917018 source:c:\projects\cpp\sfml\videodemo\map.cpp
 	"map.h"
 
-1630313948 c:\projects\cpp\sfml\videodemo\map.h
+1630916421 c:\projects\cpp\sfml\videodemo\map.h
 	"tools.h"
+	<SFML/Graphics.hpp>
 	<sstream>
 	<string>
 	<fstream>
