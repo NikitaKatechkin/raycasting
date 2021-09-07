@@ -22,21 +22,18 @@ View Camera::getView()
     return m_view;
 }
 
-/*void Player::setSize(sf::Vector2f l_size)
+void Camera::leftRotate(float delta)
 {
-    m_size = l_size;
+    this->Rotate(delta);
 }
 
-sf::Vector2f Player::getSize()
+void Camera::rightRotate(float delta)
 {
-    return m_size;
-}*/
+    this->Rotate(delta);
+}
 
 void Camera::draw(sf::RenderWindow* l_window, Player* player, Game_map* game_map)
 {
-    /*const size_t rect_width = winSize.width / (game_map.m_sizeInTile.width * 2);
-    const size_t rect_height = winSize.height / game_map.m_sizeInTile.height;*/
-
     for (size_t i = 0; i < l_window->getSize().x / 2; i++)
     {
         float angle = (m_view.angle - m_view.field_of_view / 2) + i * (m_view.field_of_view / float(l_window->getSize().x / 2));
@@ -45,10 +42,8 @@ void Camera::draw(sf::RenderWindow* l_window, Player* player, Game_map* game_map
             float current_x = player->getCoords().x + m_pending.x + distance * cos(angle);
             float current_y = player->getCoords().y + m_pending.y + distance * sin(angle);
 
-            //DRAW HERE
-            size_t px_x = size_t(current_x * game_map->getBlockSize().x); //game_map.getBlockSize().x
-            size_t px_y = size_t(current_y * game_map->getBlockSize().y); //game_map.getBlockSize().y
-            //(*frameBuffer)[px_x + px_y * winSize.width] = pack_color(160, 160, 160);
+            size_t px_x = size_t(current_x * game_map->getBlockSize().x);
+            size_t px_y = size_t(current_y * game_map->getBlockSize().y);
 
             sf::RectangleShape tmp_pixel = sf::RectangleShape(sf::Vector2f(1, 1));
             tmp_pixel.setFillColor(sf::Color::Yellow);
@@ -58,9 +53,9 @@ void Camera::draw(sf::RenderWindow* l_window, Player* player, Game_map* game_map
 
             if (game_map->game_scheme[int(current_x)+ int(current_y)*int(game_map->m_sizeInTile.x)] != ' ')
             {
-                size_t column_height = l_window->getSize().y / distance;
-                /*draw_rectangle(frameBuffer, winSize.width, winSize.height, (winSize.width/2 + i), (winSize.height / 2 - column_height / 2),
-                               1, column_height, pack_color(0, 255, 255));*/
+                size_t column_height = l_window->getSize().y / (distance * cos(angle - player->getCamera()->getView().angle));
+
+                if(column_height >= l_window->getSize().y) { column_height = l_window->getSize().y; }
 
                 tmp_pixel.setFillColor(sf::Color::Red);
                 tmp_pixel.setSize(sf::Vector2f(1.f, float(column_height)));
@@ -74,11 +69,15 @@ void Camera::draw(sf::RenderWindow* l_window, Player* player, Game_map* game_map
     }
 }
 
-Camera::Camera(sf::Vector2f l_pending, View l_view/*, sf::Vector2f l_size*/)
+void Camera::Rotate(float l_delta)
+{
+    m_view.angle += l_delta;
+}
+
+Camera::Camera(sf::Vector2f l_pending, View l_view)
 {
     m_pending = l_pending;
     m_view = l_view;
-    /*m_size = l_size;*/
 }
 
 Camera::~Camera()

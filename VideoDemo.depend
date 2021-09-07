@@ -1,29 +1,22 @@
 # depslib dependency file v1.0
-1630919324 source:c:\projects\cpp\sfml\videodemo\main.cpp
-	<fstream>
-	<vector>
-	<cstdint>
-	<cassert>
-	<math.h>
-	"player.h"
-	"map.h"
-	"window.h"
+1631031859 source:c:\projects\cpp\sfml\videodemo\main.cpp
 	<SFML/Graphics.hpp>
 	"map.h"
 	<cassert>
-
-1630961857 source:c:\projects\cpp\sfml\videodemo\player.cpp
 	"player.h"
 
-1630961859 c:\projects\cpp\sfml\videodemo\player.h
-	"tools.h"
+1631031604 source:c:\projects\cpp\sfml\videodemo\player.cpp
+	"player.h"
+
+1631031653 c:\projects\cpp\sfml\videodemo\player.h
+	"map.h"
 	<SFML/Graphics.hpp>
 	"camera.h"
 
 1630092952 source:c:\projects\cpp\sfml\videodemo\player.h
 	<iostream>
 
-1630187514 c:\projects\cpp\sfml\videodemo\tools.h
+1631029021 c:\projects\cpp\sfml\videodemo\tools.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -34,8 +27,7 @@
 1630917018 source:c:\projects\cpp\sfml\videodemo\map.cpp
 	"map.h"
 
-1630916421 c:\projects\cpp\sfml\videodemo\map.h
-	"tools.h"
+1631028824 c:\projects\cpp\sfml\videodemo\map.h
 	<SFML/Graphics.hpp>
 	<sstream>
 	<string>
@@ -44,7 +36,7 @@
 1630095855 c:\projects\cpp\sfml\videodemo\tools.cpp
 	"tools.h"
 
-1630187495 source:c:\projects\cpp\sfml\videodemo\tools.cpp
+1631028987 source:c:\projects\cpp\sfml\videodemo\tools.cpp
 	"tools.h"
 
 1630187375 c:\projects\cpp\sfml\videodemo\window.h
@@ -464,12 +456,12 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1630961265 source:c:\projects\cpp\sfml\videodemo\camera.cpp
+1631029737 source:c:\projects\cpp\sfml\videodemo\camera.cpp
 	"camera.h"
 	"player.h"
 	"map.h"
 
-1630961543 c:\projects\cpp\sfml\videodemo\camera.h
+1631031281 c:\projects\cpp\sfml\videodemo\camera.h
 	"tools.h"
 	<SFML/Graphics.hpp>
 

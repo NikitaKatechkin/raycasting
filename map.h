@@ -1,7 +1,7 @@
 #ifndef MAP_H_INCLUDED
 #define MAP_H_INCLUDED
 
-#include "tools.h"
+//#include "tools.h"
 
 #include <SFML/Graphics.hpp>
 #include <sstream>

@@ -16,18 +16,18 @@ public:
     void setView(View l_view);
     View getView();
 
+    void leftRotate(float delta = 0.1f);
+    void rightRotate(float delta = -0.1f);
+
     void draw(sf::RenderWindow* l_window, Player* player, Game_map* game_map);
 
-    /*void setSize(sf::Vector2f l_size);
-    sf::Vector2f getSize();*/
-
-    Camera(sf::Vector2f l_pending, View l_view/*, sf::Vector2f l_size*/);
+    Camera(sf::Vector2f l_pending, View l_view);
     ~Camera();
 private:
+    void Rotate(float l_delta);
+
     sf::Vector2f m_pending;
     View m_view;
-
-    /*sf::Vector2f m_size;*/
 };
 
 #endif // CAMERA_H_INCLUDED

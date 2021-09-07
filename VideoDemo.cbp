@@ -48,6 +48,8 @@
 		<Linker>
 			<Add directory="../SFML-2.5.1/lib" />
 		</Linker>
+		<Unit filename="camera.cpp" />
+		<Unit filename="camera.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="map.cpp" />
 		<Unit filename="map.h" />
