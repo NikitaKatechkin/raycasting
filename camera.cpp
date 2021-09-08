@@ -57,7 +57,26 @@ void Camera::draw(sf::RenderWindow* l_window, Player* player, Game_map* game_map
 
                 if(column_height >= l_window->getSize().y) { column_height = l_window->getSize().y; }
 
-                tmp_pixel.setFillColor(sf::Color::Red);
+                sf::Color wallColor;
+                switch (game_map->game_scheme[int(current_x)+ int(current_y)*int(game_map->m_sizeInTile.x)])
+                {
+                case '0':
+                    wallColor = sf::Color::Magenta;
+                    break;
+                case '1':
+                    wallColor = sf::Color::Cyan;
+                    break;
+                case '2':
+                    wallColor = sf::Color::Green;
+                    break;
+                case '3':
+                    wallColor = sf::Color::Blue;
+                    break;
+                default:
+                    break;
+                }
+                tmp_pixel.setFillColor(wallColor);
+
                 tmp_pixel.setSize(sf::Vector2f(1.f, float(column_height)));
                 tmp_pixel.setPosition(sf::Vector2f(float((l_window->getSize().x /2 + i)), float(l_window->getSize().y / 2 - column_height / 2)));
 

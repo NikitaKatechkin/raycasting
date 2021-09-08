@@ -50,8 +50,8 @@ int main()
     }*/
 
     Game* game = new Game(sf::VideoMode(1024, 512), "DOOM replica",
-              sf::Vector2f(3.456, 2.345), sf::Vector2f(5.f, 5.f),
-              "./map.txt");
+                          sf::Vector2f(3.456, 2.345), sf::Vector2f(5.f, 5.f),
+                          "./map.txt");
 
     while(!game->isOver())
     {

@@ -35,6 +35,9 @@ void Game_map::draw(sf::RenderWindow *l_window)
             case '2':
                 wallColor = sf::Color::Green;
                 break;
+            case '3':
+                wallColor = sf::Color::Blue;
+                break;
             default:
                 break;
             }
