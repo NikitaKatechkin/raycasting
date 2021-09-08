@@ -16,8 +16,8 @@ public:
     void setView(View l_view);
     View getView();
 
-    void leftRotate(float delta = 0.1f);
-    void rightRotate(float delta = -0.1f);
+    void leftRotate(float delta = -0.1f);
+    void rightRotate(float delta = 0.1f);
 
     void draw(sf::RenderWindow* l_window, Player* player, Game_map* game_map);
 

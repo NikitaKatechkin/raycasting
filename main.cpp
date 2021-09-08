@@ -1,14 +1,14 @@
 #define SFML_STATIC
 
-#include <SFML/Graphics.hpp>
+/*#include <SFML/Graphics.hpp>
 #include "map.h"
 #include <cassert>
-#include "player.h"
-
+#include "player.h"*/
+#include "game.h"
 
 int main()
 {
-    sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(1024, 512), "DOOM replica");
+    /*sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(1024, 512), "DOOM replica");
     Game_map* game_map = new Game_map("./map.txt", window->getSize());
     Player* player = new Player(sf::Vector2f(3.456, 2.345), sf::Vector2f(5.f, 5.f));
 
@@ -47,6 +47,17 @@ int main()
         player->getCamera()->draw(window, player, game_map);
 
         window->display();
+    }*/
+
+    Game* game = new Game(sf::VideoMode(1024, 512), "DOOM replica",
+              sf::Vector2f(3.456, 2.345), sf::Vector2f(5.f, 5.f),
+              "./map.txt");
+
+    while(!game->isOver())
+    {
+        game->handleEvent();
+        game->update();
+        game->render();
     }
 
     return 0;

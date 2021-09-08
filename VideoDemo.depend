@@ -1,9 +1,9 @@
 # depslib dependency file v1.0
-1631031859 source:c:\projects\cpp\sfml\videodemo\main.cpp
-	<SFML/Graphics.hpp>
+1631093952 source:c:\projects\cpp\sfml\videodemo\main.cpp
 	"map.h"
 	<cassert>
 	"player.h"
+	"game.h"
 
 1631031604 source:c:\projects\cpp\sfml\videodemo\player.cpp
 	"player.h"
@@ -456,12 +456,21 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1631029737 source:c:\projects\cpp\sfml\videodemo\camera.cpp
+1631039441 source:c:\projects\cpp\sfml\videodemo\camera.cpp
 	"camera.h"
 	"player.h"
 	"map.h"
 
-1631031281 c:\projects\cpp\sfml\videodemo\camera.h
+1631090897 c:\projects\cpp\sfml\videodemo\camera.h
 	"tools.h"
 	<SFML/Graphics.hpp>
+
+1631093920 source:c:\projects\cpp\sfml\videodemo\game.cpp
+	"game.h"
+
+1631093920 c:\projects\cpp\sfml\videodemo\game.h
+	<SFML/Graphics.hpp>
+	"map.h"
+	<cassert>
+	"player.h"
 

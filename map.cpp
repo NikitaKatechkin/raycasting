@@ -22,7 +22,24 @@ void Game_map::draw(sf::RenderWindow *l_window)
             }
 
             sf::RectangleShape tmp_draw_rect(m_blockSize);
-            tmp_draw_rect.setFillColor(sf::Color::Green);
+
+            sf::Color wallColor;
+            switch (game_scheme[col_rect_index + row_rect_index * size_t(m_sizeInTile.x)])
+            {
+            case '0':
+                wallColor = sf::Color::Magenta;
+                break;
+            case '1':
+                wallColor = sf::Color::Cyan;
+                break;
+            case '2':
+                wallColor = sf::Color::Green;
+                break;
+            default:
+                break;
+            }
+            tmp_draw_rect.setFillColor(wallColor);
+
             tmp_draw_rect.setPosition(sf::Vector2f((col_rect_index * m_blockSize.x),
                                                    (row_rect_index * m_blockSize.y)));
 
