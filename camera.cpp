@@ -34,6 +34,14 @@ void Camera::rightRotate(float delta)
 
 void Camera::draw(sf::RenderWindow* l_window, Player* player, Game_map* game_map)
 {
+    /*
+    INITIALIZING TEXTURE
+    */
+    sf::Texture texture;
+	texture.loadFromFile("./walltext.png");
+	sf::Sprite sprite(texture);
+	sprite.setTexture(texture);
+
     for (size_t i = 0; i < l_window->getSize().x / 2; i++)
     {
         float angle = (m_view.angle - m_view.field_of_view / 2) + i * (m_view.field_of_view / float(l_window->getSize().x / 2));
@@ -54,33 +62,57 @@ void Camera::draw(sf::RenderWindow* l_window, Player* player, Game_map* game_map
             if (game_map->game_scheme[int(current_x)+ int(current_y)*int(game_map->m_sizeInTile.x)] != ' ')
             {
                 size_t column_height = l_window->getSize().y / (distance * cos(angle - player->getCamera()->getView().angle));
-
                 if(column_height >= l_window->getSize().y) { column_height = l_window->getSize().y; }
 
-                sf::Color wallColor;
-                switch (game_map->game_scheme[int(current_x)+ int(current_y)*int(game_map->m_sizeInTile.x)])
+                char wallType = game_map->game_scheme[int(current_x)+ int(current_y)*int(game_map->m_sizeInTile.x)];
+                /*
+                DETECTION OF COLLISION WITH HOR / VER SIDE OF WALL
+                */
+                float padding = 0.f;
+                if ((int(current_y) * game_map->getBlockSize().y <= int (current_y * float(game_map->getBlockSize().y))) &&
+                    (current_x - int(current_x) <= current_y - int(current_y)) &&
+                    (game_map->game_scheme[int(current_x - 1) + int(current_y)*int(game_map->m_sizeInTile.x)] == ' '))
                 {
-                case '0':
-                    wallColor = sf::Color::Magenta;
-                    break;
-                case '1':
-                    wallColor = sf::Color::Cyan;
-                    break;
-                case '2':
-                    wallColor = sf::Color::Green;
-                    break;
-                case '3':
-                    wallColor = sf::Color::Blue;
-                    break;
-                default:
-                    break;
+                    //VERTICAL NORMAL SIDE
+                    if (game_map->game_scheme[int(current_x) + int(current_y + 1)*int(game_map->m_sizeInTile.x)] == ' ')
+                    {
+                        padding = current_x - int(current_x);
+                    }
+                    else
+                    {
+                        padding = current_y - int(current_y);
+                    }
+
                 }
-                tmp_pixel.setFillColor(wallColor);
+                else if ((int(current_x) * game_map->getBlockSize().x < int (current_x * float(game_map->getBlockSize().x))) &&
+                    (current_x - int(current_x) >= current_y - int(current_y)) &&
+                    (game_map->game_scheme[int(current_x) + int(current_y - 1)*int(game_map->m_sizeInTile.x)] == ' '))
+                {
+                    //HORIZONTAL NORMAL SIDE
+                    padding = current_x - int(current_x);
+                }
+                else
+                {
+                    if ((int(current_x) * game_map->getBlockSize().x < int (current_x * float(game_map->getBlockSize().x))) &&
+                    (current_x - int(current_x) >= current_y - int(current_y)))
+                    {
+                        //std::cout << "VERTICAL" << std::endl;
+                        padding = current_y - int(current_y);
+                    }
+                    else
+                    {
+                        //std::cout << "HORIZONTAL" << std::endl;
+                        padding = current_x - int(current_x);
+                    }
+                }
+                /*
+                CLOTHING THE WALL
+                */
+                sprite.setTextureRect(sf::IntRect((int(wallType) - 48) * 64 + int(padding * 64), 0, 1, 64));
+                sprite.setScale(sf::Vector2f(1.f, (float(column_height) / 64.f)));
+                sprite.setPosition(sf::Vector2f(float((l_window->getSize().x /2 + i)), float(l_window->getSize().y / 2 - column_height / 2)));
 
-                tmp_pixel.setSize(sf::Vector2f(1.f, float(column_height)));
-                tmp_pixel.setPosition(sf::Vector2f(float((l_window->getSize().x /2 + i)), float(l_window->getSize().y / 2 - column_height / 2)));
-
-                l_window->draw(tmp_pixel);
+                l_window->draw(sprite);
 
                 break;
             }

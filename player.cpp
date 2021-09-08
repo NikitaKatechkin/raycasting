@@ -49,7 +49,7 @@ Player::Player(sf::Vector2f l_coords, sf::Vector2f l_size, sf::Vector2f l_camera
 {
     m_coords = l_coords;
     m_size = l_size;
-    m_camera = new Camera(l_camera_pending, view(1.523, PI / 3));
+    m_camera = new Camera(l_camera_pending, view(1.5708f, PI / 3));
 }
 
 Player::~Player()
