@@ -59,12 +59,13 @@ bool Game::isOver()
 
 Game::Game(sf::VideoMode l_videoMode, std::string l_windowName,
            sf::Vector2f l_coords, sf::Vector2f l_size,
-           std::string l_filePath, sf::Vector2f l_camera_pending, bool l_isOver):
+           std::string l_filePath, std::string filePath, sf::Vector2f l_camera_pending, bool l_isOver):
                m_isOver(l_isOver)
 {
     m_window = new sf::RenderWindow(l_videoMode, l_windowName);
-    m_gameMap = new Game_map(l_filePath, m_window->getSize());
+    m_gameMap = new Game_map(l_filePath, m_window->getSize(), filePath);
     m_player = new Player(l_coords, l_size, l_camera_pending);
+    enemys = new Enemy[4];
 }
 
 Game::~Game()
@@ -72,4 +73,5 @@ Game::~Game()
     delete m_player;
     delete m_gameMap;
     delete m_window;
+    delete[] enemys;
 }

@@ -61,7 +61,7 @@ void Game_map::draw(sf::RenderWindow *l_window)
     }
 }
 
-Game_map::Game_map(std::string filePath, sf::Vector2u winSize)
+Game_map::Game_map(std::string filePath, sf::Vector2u winSize, std::string texturePath)
 {
     std::ifstream file(filePath);
 
@@ -87,7 +87,7 @@ Game_map::Game_map(std::string filePath, sf::Vector2u winSize)
     m_blockSize = sf::Vector2f(winSize.x / (m_sizeInTile.x * 2), winSize.y / m_sizeInTile.y);
 
     texture = new sf::Texture();
-    texture->loadFromFile("./walltext.png");
+    texture->loadFromFile(texturePath);
 
     sprite = new sf::Sprite (*texture);
     //sprite->setTexture(texture);

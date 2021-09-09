@@ -45,7 +45,7 @@ void Camera::draw(sf::RenderWindow* l_window, Player* player, Game_map* game_map
     for (size_t i = 0; i < l_window->getSize().x / 2; i++)
     {
         float angle = (m_view.angle - m_view.field_of_view / 2) + i * (m_view.field_of_view / float(l_window->getSize().x / 2));
-        for(float distance = 0; distance < 20; distance += 0.05)
+        for(float distance = 0; distance < 5; distance += 0.05)
         {
             float current_x = player->getCoords().x + m_pending.x + distance * cos(angle);
             float current_y = player->getCoords().y + m_pending.y + distance * sin(angle);
@@ -107,6 +107,7 @@ void Camera::draw(sf::RenderWindow* l_window, Player* player, Game_map* game_map
 
                 l_window->draw(*(game_map->getSprite()));
 
+                //wallStack = true;
                 break;
             }
         }

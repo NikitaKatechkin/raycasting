@@ -26,7 +26,7 @@ public:
     void setBlockSize(sf::Vector2f l_size);
     sf::Vector2f getBlockSize();
 
-    Game_map(std::string filePath, sf::Vector2u winSize);
+    Game_map(std::string filePath, sf::Vector2u winSize, std::string texturePath);
     ~Game_map();
 };
 

@@ -5,6 +5,7 @@
 #include "map.h"
 #include <cassert>
 #include "player.h"
+#include "enemy.h"
 
 class Game
 {
@@ -17,13 +18,16 @@ public:
 
     Game(sf::VideoMode l_videoMode, std::string l_windowName,
          sf::Vector2f l_coords, sf::Vector2f l_size,
-         std::string filePath, sf::Vector2f l_camera_pending = sf::Vector2f(0, 0), bool l_isOver = false);
+         std::string filePath, std::string textureWallPath,
+         sf::Vector2f l_camera_pending = sf::Vector2f(0, 0), bool l_isOver = false);
     ~Game();
 private:
     bool m_isOver;
 
     Player* m_player;
     Game_map* m_gameMap;
+
+    Enemy* enemys;
 
     sf::RenderWindow* m_window;
 };
