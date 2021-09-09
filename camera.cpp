@@ -37,10 +37,10 @@ void Camera::draw(sf::RenderWindow* l_window, Player* player, Game_map* game_map
     /*
     INITIALIZING TEXTURE
     */
-    sf::Texture texture;
+    /*sf::Texture texture;
 	texture.loadFromFile("./walltext.png");
 	sf::Sprite sprite(texture);
-	sprite.setTexture(texture);
+	sprite.setTexture(texture);*/
 
     for (size_t i = 0; i < l_window->getSize().x / 2; i++)
     {
@@ -70,22 +70,15 @@ void Camera::draw(sf::RenderWindow* l_window, Player* player, Game_map* game_map
                 */
                 float padding = 0.f;
                 if ((int(current_y) * game_map->getBlockSize().y <= int (current_y * float(game_map->getBlockSize().y))) &&
-                    (current_x - int(current_x) <= current_y - int(current_y)) &&
+                    ((current_x - int(current_x)) *  (current_x - int(current_x)) <= 0.025) &&
                     (game_map->game_scheme[int(current_x - 1) + int(current_y)*int(game_map->m_sizeInTile.x)] == ' '))
                 {
                     //VERTICAL NORMAL SIDE
-                    if (game_map->game_scheme[int(current_x) + int(current_y + 1)*int(game_map->m_sizeInTile.x)] == ' ')
-                    {
-                        padding = current_x - int(current_x);
-                    }
-                    else
-                    {
-                        padding = current_y - int(current_y);
-                    }
+                    padding = current_y - int(current_y);
 
                 }
                 else if ((int(current_x) * game_map->getBlockSize().x < int (current_x * float(game_map->getBlockSize().x))) &&
-                    (current_x - int(current_x) >= current_y - int(current_y)) &&
+                    ((current_y - int(current_y)) *  (current_y - int(current_y)) <= 0.025) &&
                     (game_map->game_scheme[int(current_x) + int(current_y - 1)*int(game_map->m_sizeInTile.x)] == ' '))
                 {
                     //HORIZONTAL NORMAL SIDE
@@ -108,11 +101,11 @@ void Camera::draw(sf::RenderWindow* l_window, Player* player, Game_map* game_map
                 /*
                 CLOTHING THE WALL
                 */
-                sprite.setTextureRect(sf::IntRect((int(wallType) - 48) * 64 + int(padding * 64), 0, 1, 64));
-                sprite.setScale(sf::Vector2f(1.f, (float(column_height) / 64.f)));
-                sprite.setPosition(sf::Vector2f(float((l_window->getSize().x /2 + i)), float(l_window->getSize().y / 2 - column_height / 2)));
+                game_map->getSprite()->setTextureRect(sf::IntRect((int(wallType) - 48) * 64 + int(padding * 64), 0, 1, 64));
+                game_map->getSprite()->setScale(sf::Vector2f(1.f, (float(column_height) / 64.f)));
+                game_map->getSprite()->setPosition(sf::Vector2f(float((l_window->getSize().x /2 + i)), float(l_window->getSize().y / 2 - column_height / 2)));
 
-                l_window->draw(sprite);
+                l_window->draw(*(game_map->getSprite()));
 
                 break;
             }

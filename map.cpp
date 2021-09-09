@@ -10,6 +10,16 @@ sf::Vector2f Game_map::getBlockSize()
     return m_blockSize;
 }
 
+sf::Texture* Game_map::getTexture()
+{
+    return texture;
+}
+
+sf::Sprite* Game_map::getSprite()
+{
+    return sprite;
+}
+
 void Game_map::draw(sf::RenderWindow *l_window)
 {
     for (size_t row_rect_index = 0; row_rect_index < size_t(m_sizeInTile.x); row_rect_index++)
@@ -74,7 +84,13 @@ Game_map::Game_map(std::string filePath, sf::Vector2u winSize)
         }
     }
 
-   m_blockSize = sf::Vector2f(winSize.x / (m_sizeInTile.x * 2), winSize.y / m_sizeInTile.y);
+    m_blockSize = sf::Vector2f(winSize.x / (m_sizeInTile.x * 2), winSize.y / m_sizeInTile.y);
+
+    texture = new sf::Texture();
+    texture->loadFromFile("./walltext.png");
+
+    sprite = new sf::Sprite (*texture);
+    //sprite->setTexture(texture);
 }
 
 Game_map::~Game_map()

@@ -15,6 +15,12 @@ public:
     sf::Vector2f m_sizeInTile;
     sf::Vector2f m_blockSize;
 
+    sf::Texture* texture;
+    sf::Sprite* sprite;
+
+    sf::Texture* getTexture();
+    sf::Sprite* getSprite();
+
     void draw(sf::RenderWindow *l_window/*, std::vector<uint32_t>* frameBuffer*/);
 
     void setBlockSize(sf::Vector2f l_size);
