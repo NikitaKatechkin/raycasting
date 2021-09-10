@@ -40,6 +40,7 @@ void Game::render()
     m_gameMap->draw(m_window);
 
     m_player->getCamera()->draw(m_window, m_player, m_gameMap);
+    m_player->getCamera()->drawObjects(m_window, m_player, m_gameMap, m_enemys);
     m_player->draw(m_window, m_gameMap);
 
     for (int i = 0; i < 4; i++)
@@ -62,6 +63,11 @@ void Game::update()
 bool Game::isOver()
 {
     return m_isOver;
+}
+
+Enemy* Game::getEnemys()
+{
+    return m_enemys;
 }
 
 Game::Game(sf::VideoMode l_videoMode, std::string l_windowName,

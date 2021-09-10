@@ -15,13 +15,14 @@
 1630092952 source:c:\projects\cpp\sfml\videodemo\player.h
 	<iostream>
 
-1631029021 c:\projects\cpp\sfml\videodemo\tools.h
+1631305328 c:\projects\cpp\sfml\videodemo\tools.h
 	<iostream>
 	<fstream>
 	<vector>
 	<cstdint>
 	<cassert>
 	<math.h>
+	<stdlib.h>
 
 1631200140 source:c:\projects\cpp\sfml\videodemo\map.cpp
 	"map.h"
@@ -455,29 +456,30 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1631279787 source:c:\projects\cpp\sfml\videodemo\camera.cpp
+1631307460 source:c:\projects\cpp\sfml\videodemo\camera.cpp
 	"camera.h"
 	"player.h"
 	"map.h"
+	"enemy.h"
 
-1631090897 c:\projects\cpp\sfml\videodemo\camera.h
+1631293600 c:\projects\cpp\sfml\videodemo\camera.h
 	"tools.h"
 	<SFML/Graphics.hpp>
 
-1631283578 source:c:\projects\cpp\sfml\videodemo\game.cpp
+1631305019 source:c:\projects\cpp\sfml\videodemo\game.cpp
 	"game.h"
 
-1631279839 c:\projects\cpp\sfml\videodemo\game.h
+1631293495 c:\projects\cpp\sfml\videodemo\game.h
 	<SFML/Graphics.hpp>
 	"map.h"
 	<cassert>
 	"player.h"
 	"enemy.h"
 
-1631281785 source:c:\projects\cpp\sfml\videodemo\enemy.cpp
+1631304856 source:c:\projects\cpp\sfml\videodemo\enemy.cpp
 	"enemy.h"
 
-1631282916 c:\projects\cpp\sfml\videodemo\enemy.h
+1631304689 c:\projects\cpp\sfml\videodemo\enemy.h
 	"game_character.h"
 
 1631283511 c:\projects\cpp\sfml\videodemo\game_character.h

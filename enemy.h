@@ -6,9 +6,14 @@
 class Enemy : public Game_character
 {
 public:
-    Enemy(sf::Vector2f l_coords = sf::Vector2f(0, 0), sf::Vector2f l_size = sf::Vector2f(5, 5));
+    sf::RectangleShape* getMapRect();
+
+    void draw(sf::RenderWindow* l_window, Game_map* game_map);
+
+    Enemy(sf::Vector2f l_coords = sf::Vector2f(0, 0), sf::Vector2f l_size = sf::Vector2f(5, 5), sf::Color l_mapRectColor = sf::Color::Red);
     ~Enemy();
 private:
+    sf::RectangleShape* m_mapRect;
 };
 
 #endif // ENEMY_H_INCLUDED

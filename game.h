@@ -16,6 +16,8 @@ public:
 
     bool isOver();
 
+    Enemy* getEnemys();
+
     Game(sf::VideoMode l_videoMode, std::string l_windowName,
          sf::Vector2f l_coords, sf::Vector2f l_size,
          std::string filePath, std::string textureWallPath,

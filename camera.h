@@ -6,6 +6,7 @@
 
 class Player;
 class Game_map;
+class Enemy;
 
 class Camera
 {
@@ -20,6 +21,7 @@ public:
     void rightRotate(float delta = 0.1f);
 
     void draw(sf::RenderWindow* l_window, Player* player, Game_map* game_map);
+    void drawObjects(sf::RenderWindow* l_window, Player* player, Game_map* game_map, Enemy* enemys);
 
     Camera(sf::Vector2f l_pending, View l_view);
     ~Camera();

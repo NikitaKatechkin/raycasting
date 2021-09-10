@@ -7,6 +7,7 @@
 #include <cstdint>
 #include <cassert>
 #include <math.h>
+#include <stdlib.h>
 
 struct View
 {
