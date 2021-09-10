@@ -38,7 +38,14 @@ void Game::render()
     m_window->clear();
 
     m_gameMap->draw(m_window);
+
     m_player->getCamera()->draw(m_window, m_player, m_gameMap);
+    m_player->draw(m_window, m_gameMap);
+
+    for (int i = 0; i < 4; i++)
+    {
+        m_enemys[i].draw(m_window, m_gameMap);
+    }
 
     m_window->display();
 }
@@ -69,7 +76,7 @@ Game::Game(sf::VideoMode l_videoMode, std::string l_windowName,
     m_enemys = new Enemy[4];
     for (int i = 0; i < 4; i++)
     {
-        m_enemys[i].setCoords(sf::Vector2f(3.456, 3.456 + 0.1*i));
+        m_enemys[i].setCoords(sf::Vector2f(3.456 + 0.5f * i, 3.456 + 0.5f * i));
     }
 }
 

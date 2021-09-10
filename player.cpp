@@ -1,25 +1,5 @@
 #include "player.h"
 
-void Player::setCoords(sf::Vector2f l_coords)
-{
-    m_coords = l_coords;
-}
-
-sf::Vector2f Player::getCoords()
-{
-    return m_coords;
-}
-
-void Player::setSize(sf::Vector2f l_size)
-{
-    m_size = l_size;
-}
-
-sf::Vector2f Player::getSize()
-{
-    return m_size;
-}
-
 Camera* Player::getCamera()
 {
     return m_camera;
@@ -45,10 +25,9 @@ void Player::Move(float l_delta, Game_map* game_map)
     this->setCoords(sf::Vector2f(predict_x, predict_y));
 }
 
-Player::Player(sf::Vector2f l_coords, sf::Vector2f l_size, sf::Vector2f l_camera_pending)
+Player::Player(sf::Vector2f l_coords, sf::Vector2f l_size, sf::Vector2f l_camera_pending):
+    Game_character(l_coords, l_size)
 {
-    m_coords = l_coords;
-    m_size = l_size;
     m_camera = new Camera(l_camera_pending, view(1.5708f, PI / 3));
 }
 
