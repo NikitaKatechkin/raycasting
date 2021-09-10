@@ -5,8 +5,6 @@
 #include <SFML/Graphics.hpp>
 #include "camera.h"
 
-#define PI 3.1415
-
 class Enemy
 {
 public:

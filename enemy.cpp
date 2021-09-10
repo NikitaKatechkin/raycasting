@@ -1,4 +1,5 @@
 #include "enemy.h"
+#define PI 3.1415
 
 void Enemy::setCoords(sf::Vector2f l_coords)
 {

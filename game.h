@@ -27,7 +27,7 @@ private:
     Player* m_player;
     Game_map* m_gameMap;
 
-    Enemy* enemys;
+    Enemy* m_enemys;
 
     sf::RenderWindow* m_window;
 };

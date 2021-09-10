@@ -65,7 +65,12 @@ Game::Game(sf::VideoMode l_videoMode, std::string l_windowName,
     m_window = new sf::RenderWindow(l_videoMode, l_windowName);
     m_gameMap = new Game_map(l_filePath, m_window->getSize(), filePath);
     m_player = new Player(l_coords, l_size, l_camera_pending);
-    enemys = new Enemy[4];
+
+    m_enemys = new Enemy[4];
+    for (int i = 0; i < 4; i++)
+    {
+        m_enemys[i].setCoords(sf::Vector2f(3.456, 3.456 + 0.1*i));
+    }
 }
 
 Game::~Game()
@@ -73,5 +78,5 @@ Game::~Game()
     delete m_player;
     delete m_gameMap;
     delete m_window;
-    delete[] enemys;
+    delete[] m_enemys;
 }

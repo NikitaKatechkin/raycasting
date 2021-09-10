@@ -37,10 +37,6 @@ void Camera::draw(sf::RenderWindow* l_window, Player* player, Game_map* game_map
     /*
     INITIALIZING TEXTURE
     */
-    /*sf::Texture texture;
-	texture.loadFromFile("./walltext.png");
-	sf::Sprite sprite(texture);
-	sprite.setTexture(texture);*/
 
     for (size_t i = 0; i < l_window->getSize().x / 2; i++)
     {
