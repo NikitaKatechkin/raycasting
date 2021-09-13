@@ -130,6 +130,12 @@ void Camera::drawObjects(sf::RenderWindow* l_window, Player* player, Game_map* g
     float rightViewBorder;
     float distancePtoE;
 
+    sf::RectangleShape tmp_square;
+    tmp_square.setFillColor(sf::Color::Green);
+
+    size_t column_height;
+    float render_x_coords;
+
     for (int i = 0; i < 4; i++)
     {
         angle = std::atan2(enemys[i].getCoords().y - player->getCoords().y, enemys[i].getCoords().x - player->getCoords().x);
@@ -163,15 +169,38 @@ void Camera::drawObjects(sf::RenderWindow* l_window, Player* player, Game_map* g
                 }
             }
 
-            if (!isObstclOnWay) { enemys[i].getMapRect()->setFillColor(sf::Color::Green); }
-            //else { enemys[i].getMapRect()->setFillColor(sf::Color::Red); }
+            if (!isObstclOnWay)
+            {
+                enemys[i].getMapRect()->setFillColor(sf::Color::Green);
+
+                column_height = l_window->getSize().y / (distancePtoE * cos(angle - player->getCamera()->getView().angle));
+                if(column_height >= l_window->getSize().y) { column_height = l_window->getSize().y; }
+
+                //float x_coords = l_window->getSize().x / 2 + (l_window->getSize().x / 2) * ((angle - leftViewBorder) / (rightViewBorder - leftViewBorder));
+                render_x_coords = (l_window->getSize().x / 2.f) * (1.f + (angle - leftViewBorder) / (rightViewBorder - leftViewBorder));
+                render_x_coords -= column_height / 2;
+
+                if (render_x_coords < 513)
+                {
+                    render_x_coords = 512.f;
+                    tmp_square.setSize(sf::Vector2f(render_x_coords + column_height - 512, column_height));
+                }
+                else
+                {
+                    tmp_square.setSize(sf::Vector2f(column_height, column_height));
+                }
+
+                tmp_square.setPosition(sf::Vector2f(render_x_coords, float(l_window->getSize().y / 2 - column_height / 2)));
+                l_window->draw(tmp_square);
+                //std::cout << render_x_coords << std::endl;
+            }
         }
         else
         {
             enemys[i].getMapRect()->setFillColor(sf::Color::Red);
         }
 
-        std::cout << (angle - leftViewBorder) / (rightViewBorder - leftViewBorder) << std::endl;
+        //std::cout << (angle - leftViewBorder) / (rightViewBorder - leftViewBorder) << std::endl;
 
     }
 }

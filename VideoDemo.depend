@@ -456,7 +456,7 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1631563742 source:c:\projects\cpp\sfml\videodemo\camera.cpp
+1631567260 source:c:\projects\cpp\sfml\videodemo\camera.cpp
 	"camera.h"
 	"player.h"
 	"map.h"
