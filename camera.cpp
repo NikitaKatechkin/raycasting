@@ -38,20 +38,27 @@ void Camera::draw(sf::RenderWindow* l_window, Player* player, Game_map* game_map
     /*
     INITIALIZING TEXTURE
     */
+    float angle;
+    float current_x;
+    float current_y;
+
+    sf::RectangleShape tmp_pixel = sf::RectangleShape(sf::Vector2f(1, 1));
+    tmp_pixel.setFillColor(sf::Color::Yellow);
+
+    size_t px_x;
+    size_t px_y;
 
     for (size_t i = 0; i < l_window->getSize().x / 2; i++)
     {
-        float angle = (m_view.angle - m_view.field_of_view / 2) + i * (m_view.field_of_view / float(l_window->getSize().x / 2));
+        angle = (m_view.angle - m_view.field_of_view / 2) + i * (m_view.field_of_view / float(l_window->getSize().x / 2));
         for(float distance = 0; distance < 5; distance += 0.05)
         {
-            float current_x = player->getCoords().x + m_pending.x + distance * cos(angle);
-            float current_y = player->getCoords().y + m_pending.y + distance * sin(angle);
+            current_x = player->getCoords().x + m_pending.x + distance * cos(angle);
+            current_y = player->getCoords().y + m_pending.y + distance * sin(angle);
 
-            size_t px_x = size_t(current_x * game_map->getBlockSize().x);
-            size_t px_y = size_t(current_y * game_map->getBlockSize().y);
+            px_x = size_t(current_x * game_map->getBlockSize().x);
+            px_y = size_t(current_y * game_map->getBlockSize().y);
 
-            sf::RectangleShape tmp_pixel = sf::RectangleShape(sf::Vector2f(1, 1));
-            tmp_pixel.setFillColor(sf::Color::Yellow);
             tmp_pixel.setPosition(sf::Vector2f(float(px_x), float(px_y)));
 
             l_window->draw(tmp_pixel);
@@ -113,61 +120,60 @@ void Camera::draw(sf::RenderWindow* l_window, Player* player, Game_map* game_map
 
 void Camera::drawObjects(sf::RenderWindow* l_window, Player* player, Game_map* game_map, Enemy* enemys)
 {
+    bool isObstclOnWay;
+
+    float current_x;
+    float current_y;
+
+    float angle;
+    float leftViewBorder;
+    float rightViewBorder;
+    float distancePtoE;
+
     for (int i = 0; i < 4; i++)
     {
-        float angle = std::atan2(enemys[i].getCoords().y - player->getCoords().y, enemys[i].getCoords().x - player->getCoords().x);
+        angle = std::atan2(enemys[i].getCoords().y - player->getCoords().y, enemys[i].getCoords().x - player->getCoords().x);
         angle = std::fmod(angle, 6.28319f);
         if (angle < 0) { angle = 6.28319f + angle; }
 
-        float leftViewBorder = player->getCamera()->getView().angle - player->getCamera()->getView().field_of_view / 2;
+        leftViewBorder = player->getCamera()->getView().angle - player->getCamera()->getView().field_of_view / 2;
         leftViewBorder = std::fmod(leftViewBorder, 6.28319f);
         if (leftViewBorder < 0) { leftViewBorder = 6.28319f + leftViewBorder; }
 
-        float rightViewBorder = player->getCamera()->getView().angle + player->getCamera()->getView().field_of_view / 2;
+        rightViewBorder = player->getCamera()->getView().angle + player->getCamera()->getView().field_of_view / 2;
         rightViewBorder = std::fmod(rightViewBorder, 6.28319f);
         if (rightViewBorder < 0) { rightViewBorder = 6.28319f + rightViewBorder; }
 
-        float distancePtoE = std::hypot(enemys[i].getCoords().x - player->getCoords().x, enemys[i].getCoords().y - player->getCoords().y);
+        distancePtoE = std::hypot(enemys[i].getCoords().x - player->getCoords().x, enemys[i].getCoords().y - player->getCoords().y);
 
         if ((angle >= leftViewBorder) && (angle <= rightViewBorder) && (distancePtoE <= 5.f))
         {
-            enemys[i].getMapRect()->setFillColor(sf::Color::Green);
+            //Produce check for obstacles on the way
+            isObstclOnWay = false;
 
-            /*size_t column_height = l_window->getSize().y * ((5.f - distancePtoE) / 5.f );
-            if(column_height >= l_window->getSize().y) { column_height = l_window->getSize().y; }
+            for(float distance = 0; distance < distancePtoE; distance += 0.90)
+            {
+                current_x = player->getCoords().x + m_pending.x + distance * cos(angle);
+                current_y = player->getCoords().y + m_pending.y + distance * sin(angle);
 
-            float tmp_enemy_x = ((leftViewBorder - angle) / (player->getCamera()->getView().field_of_view)) * l_window->getSize().x / 2 + l_window->getSize().x / 2;
-            //tmp_enemy_x -= (float(column_height) / 2);
+                if (game_map->game_scheme[int(current_x)+ int(current_y)*int(game_map->m_sizeInTile.x)] != ' ')
+                {
+                    isObstclOnWay = true;
+                    break;
+                }
+            }
 
-            sf::RectangleShape tmp_rect = sf::RectangleShape(sf::Vector2f(float(column_height), float(column_height)));
-            tmp_rect.setPosition(tmp_enemy_x, float(l_window->getSize().y / 2 - column_height / 2));
-            tmp_rect.setFillColor(sf::Color::Green);
-
-            l_window->draw(tmp_rect);*/
+            if (!isObstclOnWay) { enemys[i].getMapRect()->setFillColor(sf::Color::Green); }
+            //else { enemys[i].getMapRect()->setFillColor(sf::Color::Red); }
         }
         else
         {
             enemys[i].getMapRect()->setFillColor(sf::Color::Red);
         }
-        std::cout << angle << "|" << leftViewBorder << "|" << rightViewBorder << "|||" << i << std::endl;
+
+        std::cout << (angle - leftViewBorder) / (rightViewBorder - leftViewBorder) << std::endl;
+
     }
-
-
-    /*if ((std::atan2(huita - player_x, huita - player_y) >= player->getCamera()->getView().angle - player->getCamera()->getView().field_of_view / 2)
-                && (std::atan2(huita - px_x, huita - px_y) <= player->getCamera()->getView().angle + player->getCamera()->getView().field_of_view / 2))
-            {
-                if(std::hypot(huita - px_x, huita - px_y) <= 5)
-                {
-                    size_t column_height = l_window->getSize().y * (distance - std::hypot(huita - px_x, huita - px_y)) / distance;
-                    if(column_height >= l_window->getSize().y) { column_height = l_window->getSize().y; }
-
-                    //Calculate x coord of enemy sprite
-                    float tmp_enemy_x = (std::atan2(huita - px_x, huita - px_y) -
-                                         (player->getCamera()->getView().angle - player->getCamera()->getView().field_of_view / 2));
-                    tmp_enemy_x = tmp_enemy_x / player->getCamera()->getView().field_of_view * game_map->getBlockSize().x;
-
-                }
-            }*/
 }
 
 void Camera::Rotate(float l_delta)
