@@ -45,7 +45,7 @@ void Game::render()
 
     for (int i = 0; i < 4; i++)
     {
-        m_enemys[i].draw(m_window, m_gameMap);
+        m_enemys[i].draw(m_window, m_gameMap, m_player, m_player->getCamera());
     }
 
     m_window->display();

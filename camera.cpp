@@ -120,11 +120,6 @@ void Camera::draw(sf::RenderWindow* l_window, Player* player, Game_map* game_map
 
 void Camera::drawObjects(sf::RenderWindow* l_window, Player* player, Game_map* game_map, Enemy* enemys)
 {
-    bool isObstclOnWay;
-
-    float current_x;
-    float current_y;
-
     float angle;
     float leftViewBorder;
     float rightViewBorder;
@@ -152,7 +147,7 @@ void Camera::drawObjects(sf::RenderWindow* l_window, Player* player, Game_map* g
 
         distancePtoE = std::hypot(enemys[i].getCoords().x - player->getCoords().x, enemys[i].getCoords().y - player->getCoords().y);
 
-        if ((angle >= leftViewBorder) && (angle <= rightViewBorder) && (distancePtoE <= 5.f))
+        /*if ((angle >= leftViewBorder) && (angle <= rightViewBorder) && (distancePtoE <= 5.f))
         {
             //Produce check for obstacles on the way
             isObstclOnWay = false;
@@ -167,41 +162,33 @@ void Camera::drawObjects(sf::RenderWindow* l_window, Player* player, Game_map* g
                     isObstclOnWay = true;
                     break;
                 }
-            }
+            }*/
 
-            if (!isObstclOnWay)
-            {
-                enemys[i].getMapRect()->setFillColor(sf::Color::Green);
-
-                column_height = l_window->getSize().y / (distancePtoE * cos(angle - player->getCamera()->getView().angle));
-                if(column_height >= l_window->getSize().y) { column_height = l_window->getSize().y; }
-
-                //float x_coords = l_window->getSize().x / 2 + (l_window->getSize().x / 2) * ((angle - leftViewBorder) / (rightViewBorder - leftViewBorder));
-                render_x_coords = (l_window->getSize().x / 2.f) * (1.f + (angle - leftViewBorder) / (rightViewBorder - leftViewBorder));
-                render_x_coords -= column_height / 2;
-
-                if (render_x_coords < 513)
-                {
-                    render_x_coords = 512.f;
-                    tmp_square.setSize(sf::Vector2f(render_x_coords + column_height - 512, column_height));
-                }
-                else
-                {
-                    tmp_square.setSize(sf::Vector2f(column_height, column_height));
-                }
-
-                tmp_square.setPosition(sf::Vector2f(render_x_coords, float(l_window->getSize().y / 2 - column_height / 2)));
-                l_window->draw(tmp_square);
-                //std::cout << render_x_coords << std::endl;
-            }
-        }
-        else
+        if (enemys[i].getMapRect()->getFillColor() == sf::Color::Green)
         {
-            enemys[i].getMapRect()->setFillColor(sf::Color::Red);
+            //enemys[i].getMapRect()->setFillColor(sf::Color::Green);
+
+            column_height = l_window->getSize().y / (distancePtoE * cos(angle - player->getCamera()->getView().angle));
+            if(column_height >= l_window->getSize().y) { column_height = l_window->getSize().y; }
+
+            //float x_coords = l_window->getSize().x / 2 + (l_window->getSize().x / 2) * ((angle - leftViewBorder) / (rightViewBorder - leftViewBorder));
+            render_x_coords = (l_window->getSize().x / 2.f) * (1.f + (angle - leftViewBorder) / (rightViewBorder - leftViewBorder));
+            render_x_coords -= column_height / 2;
+
+            if (render_x_coords < 513)
+            {
+                render_x_coords = 512.f;
+                tmp_square.setSize(sf::Vector2f(render_x_coords + column_height - 512, column_height));
+            }
+            else
+            {
+                tmp_square.setSize(sf::Vector2f(column_height, column_height));
+            }
+
+            tmp_square.setPosition(sf::Vector2f(render_x_coords, float(l_window->getSize().y / 2 - column_height / 2)));
+            l_window->draw(tmp_square);
+            //std::cout << render_x_coords << std::endl;
         }
-
-        //std::cout << (angle - leftViewBorder) / (rightViewBorder - leftViewBorder) << std::endl;
-
     }
 }
 
